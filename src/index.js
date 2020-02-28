@@ -5,10 +5,11 @@ import "./css/style.css";
 // library.add(faCheck);
 // dom.watch();
 
-const clear = document.querySelector(".clear");
 const dateElement = document.getElementById("date");
 const list = document.getElementById("list");
 const input = document.getElementById("input");
+const priority= document.getElementById('priority').value
+const description= document.getElementById('description').value
 
 const CHECK = "fa-check-circle";
 const UNCHECK = "fa-circle-thin";
@@ -40,20 +41,23 @@ const addToDo = (toDo, id, done, trash, priority, description) => {
 
 //const getForm = document.getElementById('form');
 
-document.addEventListener("click", event => {
+document.addEventListener("keyup", event => {
   if (event.keyCode == 13) {
     const toDo = input.value;
     if (toDo) {
-      addToDo(toDo, id, false, false);
+      addToDo(toDo, id, false, false, priority, description);
       LIST.push({
         name: toDo,
         id: id,
         done: false,
-        trash: false
+        trash: false,
+        priority: priority,
+        description: description
       });
       id++;
     }
     input.value = "";
+    description.value = "  ";
   }
 });
 
@@ -80,3 +84,25 @@ list.addEventListener("click", event => {
     removeToDo(element);
   }
 });
+
+// {
+//     const toDo = input.value;
+//     const priority= getElementById('priority').value
+//     const description= getElementById('description').value
+
+//     if (toDo) {
+//       addToDo(toDo, id, false, false, priority, description);
+//       LIST.push({
+//         name: toDo,
+//         id: id,
+//         priority: priority,
+//         description: description,
+//         done: false,
+//         trash: false
+//       });
+//       id++;
+//     }
+//     input.value = "";
+//     description.value = "";
+
+//   }
