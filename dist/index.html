@@ -22,11 +22,12 @@
       </div>
       <div class="content">
         <ul id="list">
-          <!--  <li class="item">
-           <i class="fa fa-check-circle co" job="complete" id="${id}"></i>
-            <p class="text co"> test </p>
+          <li class="item">
+            <i class="fa ${DONE} co" job="complete" id="${id}"></i>
+            <p class="text ${LINE} co"> TODO </p>
+
+            
             <i class="fa fa-trash-o de" job="delete" id="${id}" ></i>
-             -->
       </div>
       <div class="add-to-do">
         <!--<i class="fa fa-plus-circle"></i>
@@ -45,7 +46,7 @@
             class="formspace"
             required
           ></textarea>
-          <button name="submit" type="submit" class="formspace">Submit</button>
+          <button name="submit" id='submit' class="formspace">Submit</button>
         </container>
       </div>
     </div>

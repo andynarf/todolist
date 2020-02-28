@@ -1,15 +1,11 @@
 import "./css/style.css";
-// import { library, dom } from "@fortawesome/fontawesome-svg-core";
-// import { faCheck } from "@fortawesome/free-solid-svg-icons/faCheck";
-
-// library.add(faCheck);
-// dom.watch();
 
 const dateElement = document.getElementById("date");
 const list = document.getElementById("list");
 const input = document.getElementById("input");
 const priority= document.getElementById('priority').value
-const description= document.getElementById('description').value
+const description= document.getElementById('description')
+const submit = document.getElementById('submit')
 
 const CHECK = "fa-check-circle";
 const UNCHECK = "fa-circle-thin";
@@ -33,32 +29,29 @@ const addToDo = (toDo, id, done, trash, priority, description) => {
   const item = `
     <li class="item">
     <i class="fa ${DONE} co" job="complete" id="${id}"></i>
-    <p class="text ${LINE} co"> ${toDo} </p>
+    <p class="text ${LINE} co"> ${toDo} // ${priority} // ${description} </p>
     <i class="fa fa-trash-o de" job="delete" id="${id}" ></i>
     `;
   list.insertAdjacentHTML(position, item);
 };
 
-//const getForm = document.getElementById('form');
-
-document.addEventListener("keyup", event => {
-  if (event.keyCode == 13) {
+submit.addEventListener("click", event => {
     const toDo = input.value;
-    if (toDo) {
-      addToDo(toDo, id, false, false, priority, description);
-      LIST.push({
-        name: toDo,
-        id: id,
-        done: false,
-        trash: false,
-        priority: priority,
-        description: description
-      });
-      id++;
-    }
-    input.value = "";
-    description.value = "  ";
+    const textarea = description.value
+if (toDo) {
+    addToDo(toDo, id, false, false, priority, textarea);
+    LIST.push({
+      name: toDo,
+      id: id,
+      done: false,
+      trash: false,
+      priority: priority,
+      description: description
+    });
+    id++;
   }
+  input.value = "";
+  description.value = "";
 });
 
 const completeToDo = element => {
@@ -84,25 +77,3 @@ list.addEventListener("click", event => {
     removeToDo(element);
   }
 });
-
-// {
-//     const toDo = input.value;
-//     const priority= getElementById('priority').value
-//     const description= getElementById('description').value
-
-//     if (toDo) {
-//       addToDo(toDo, id, false, false, priority, description);
-//       LIST.push({
-//         name: toDo,
-//         id: id,
-//         priority: priority,
-//         description: description,
-//         done: false,
-//         trash: false
-//       });
-//       id++;
-//     }
-//     input.value = "";
-//     description.value = "";
-
-//   }
