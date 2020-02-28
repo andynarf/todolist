@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https:/fonts.googleapis.com/css?family=Titillium+Web">
     <script src="https://kit.fontawesome.com/7ffc4140a4.js" crossorigin="anonymous"></script>
     <!-- <link rel="stylesheet" href="../src/css/font-awesome.css">-->
-    <!-- <link rel="stylesheet" href="../src/css/style.css">  -->
+    <link rel="stylesheet" href="../src/css/style.css"> 
 </head>
 <body>
 
@@ -27,8 +27,14 @@
 
         </div>
         <div class="add-to-do">
-            <i class="fa fa-plus-circle"></i>
-            <input type="text" id="input" placeholder="Add a To-Do">
+            <!--<i class="fa fa-plus-circle"></i>
+            <input type="text" id="input" placeholder="Add a To-Do"> -->
+            <container id=form>
+            <input placeholder="ToDo" class="formspace" type="text"  requiered>
+            <input placeholder="Piority" class="formspace" required>
+            <textarea placeholder="Add a description here"  id="description" class="formspace" required></textarea>
+            <button name="submit" type="submit" class="formspace" >Submit</button>
+        </container>
         </div>
 
     </div>
