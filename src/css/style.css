@@ -126,7 +126,7 @@ body{
 }
 
 /* --------------- DROPMENU ------------ */
-
+/* 
 .dropbtn {
   background-color: #3498DB;
   color: white;
@@ -164,30 +164,12 @@ body{
 
 .dropdown a:hover {background-color: #ddd;}
 
-.show {display: block;}
-
 .listItems {
     display: flex;
     flex-wrap: wrap;
 }
+ */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#drop{ 
+    margin-left: 60%;
+}
