@@ -23,11 +23,23 @@
       <div class="content">
         <ul id="list">
           <li class="item">
-            <i class="fa ${DONE} co" job="complete" id="${id}"></i>
-            <p class="text ${LINE} co"> TODO </p>
+              
+            <i class="fa fa-circle-thin co" job="complete" id="${id}"></i>
+            <div class="listItems">
+            <p class="text co"> TODO </p>
 
-            
-            <i class="fa fa-trash-o de" job="delete" id="${id}" ></i>
+            <div class="dropdown">
+                <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+                <div id="myDropdown" class="dropdown-content">
+                  <a href="#home">Home</a>
+                  <a href="#about">About</a>
+                  <a href="#contact">Contact</a>
+                </div>
+              </div>
+            </div>
+            <i class="fa fa-trash-o de" job="delete" id="${id}" ></i> 
+
+        </ul>
       </div>
       <div class="add-to-do">
         <!--<i class="fa fa-plus-circle"></i>
