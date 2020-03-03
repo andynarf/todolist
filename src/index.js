@@ -11,8 +11,14 @@ const CHECK = "fa-check-circle";
 const UNCHECK = "fa-circle-thin";
 const LINE_THROUGH = "lineThrough";
 
-const LIST = [];
-let id = 0;
+const save = () => {localStorage.setItem('storagelist', JSON.stringify(LIST));
+                   localStorage.setItem('storageid', id);
+                   };
+
+const LIST = JSON.parse(localStorage.getItem('storage')) || [];
+// const LIST = [];
+let id = localStorage.getItem('storageid') || 0;
+
 
 const options = { weekday: "long", month: "short", day: "numeric" };
 const today = new Date();
@@ -29,9 +35,16 @@ const addToDo = (toDo, id, done, trash, priority, description) => {
   const item = `
     <li class="item">
     <i class="fa ${DONE} co" job="complete" id="${id}"></i>
-    <p class="text ${LINE} co"> ${toDo} // ${priority} // ${description} </p>
+    <p class="text ${LINE} co"> ${toDo}  </p>
+    <div class="dropdown">
+    <button class="dropbtn">Details</button>
+    <div class="dropdown-content">
+      <a href="#">priority: ${priority}</a>
+      <a href="#">description: ${description}</a>
+    </div>
+  </div> 
     <i class="fa fa-trash-o de" job="delete" id="${id}" ></i>
-    `;
+    </li>`;
   list.insertAdjacentHTML(position, item);
 };
 
@@ -49,6 +62,7 @@ if (toDo) {
       description: description
     });
     id++;
+    save();
   }
   input.value = "";
   description.value = "";
