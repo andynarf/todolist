@@ -1,40 +1,46 @@
 import "./css/style.css";
+import skeleton from "./js/skeleton";
+
+document.getElementById("skeletonid").innerHTML= skeleton;
 
 const dateElement = document.getElementById("date");
 const list = document.getElementById("list");
 const input = document.getElementById("input");
-const priority= document.getElementById('priority')
-const description= document.getElementById('description')
-const submit = document.getElementById('submit')
+const priority = document.getElementById("priority");
+const description = document.getElementById("description");
+const submit = document.getElementById("submit");
 
 const CHECK = "fa-check-circle";
 const UNCHECK = "fa-circle-thin";
 const LINE_THROUGH = "lineThrough";
 
-const myStorage = window.localStorage;
-
-let LIST;
-if(myStorage.getItem('storagelist') === null) {
-    LIST = [];
-}else {
-    LIST= JSON.parse(myStorage.getItem('storagelist'));
+let myStorage = JSON.parse(window.localStorage.getItem("TODOS"));
+if (myStorage == null) {
+  myStorage = [];
 }
 
-let id;
-if(myStorage.getItem('storageid') === null) {
-    id = 0;
-}else {
-    id= JSON.parse(myStorage.getItem('storageid'));
+let id = window.localStorage.getItem("ids");
+if (id == null) {
+  id = 0;
 }
 
-const save = () => {myStorage.setItem('storagelist', JSON.stringify(LIST));
-                   myStorage.setItem('storageid', id);
-                   };
-                  
-                  
-//const LIST = JSON.parse(myStorage.getItem('storage')) || [];
-// const LIST = [];
-//let id = myStorage.getItem('storageid') || 0;
+function updateLocalStorage(array) {
+  window.localStorage.setItem("TODOS", JSON.stringify(array));
+  window.localStorage.setItem("ids", id); }
+
+const loadToDo = localStorage => {
+  localStorage.forEach(elem => {
+    addToDo(
+      elem.name,
+      elem.id,
+      elem.done,
+      elem.trash,
+      elem.priority,
+      elem.description
+    );
+  });
+};
+
 
 
 const options = { weekday: "long", month: "short", day: "numeric" };
@@ -45,7 +51,7 @@ const addToDo = (toDo, id, done, trash, priority, description) => {
   if (trash) {
     return;
   }
-  
+
   const DONE = done ? CHECK : UNCHECK;
   const LINE = done ? LINE_THROUGH : "";
   const position = "beforeend";
@@ -56,8 +62,8 @@ const addToDo = (toDo, id, done, trash, priority, description) => {
     <div class="dropdown">
     <button class="dropbtn">Details</button>
     <div class="dropdown-content">
-      <a href="#">priority: ${priority.value}</a>
-      <a href="#">description: ${description}</a>
+      <a href="#"><b>Priority:</b> ${priority.value}</a>
+      <a href="#"><b>Description:</b> ${description}</a>
     </div>
   </div> 
     <i class="fa fa-trash-o de" job="delete" id="${id}" ></i>
@@ -66,20 +72,21 @@ const addToDo = (toDo, id, done, trash, priority, description) => {
 };
 
 submit.addEventListener("click", event => {
-    const toDo = input.value;
-    const textarea = description.value
-if (toDo) {
+  const toDo = input.value;
+  const textarea = description.value;
+  if (toDo) {
     addToDo(toDo, id, false, false, priority, textarea);
-    LIST.push({
+    myStorage.push({
       name: toDo,
       id: id,
       done: false,
       trash: false,
       priority: priority.value,
-      description: description
+      description: textarea
     });
     id++;
-    save();
+    updateLocalStorage(myStorage);
+    console.log(myStorage);
   }
   input.value = "";
   description.value = "";
@@ -90,12 +97,14 @@ const completeToDo = element => {
   element.classList.toggle(UNCHECK);
   element.parentNode.querySelector(".text").classList.toggle(LINE_THROUGH);
 
-  LIST[element.id].done = LIST[element.id].done ? false : true;
+  myStorage[element.id].done = myStorage[element.id].done ? false : true;
 };
 
 const removeToDo = element => {
   element.parentNode.parentNode.removeChild(element.parentNode);
-  LIST[element.id].trash = true;
+  myStorage[element.id].trash = true;
+  updateLocalStorage(myStorage);
+  console.log(myStorage);
 };
 
 list.addEventListener("click", event => {
@@ -104,7 +113,13 @@ list.addEventListener("click", event => {
 
   if (elementJob == "complete") {
     completeToDo(element);
+    updateLocalStorage(myStorage);
   } else if (elementJob == "delete") {
     removeToDo(element);
+    updateLocalStorage(myStorage);
   }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  loadToDo(myStorage);
 });
