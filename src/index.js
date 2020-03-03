@@ -11,13 +11,30 @@ const CHECK = "fa-check-circle";
 const UNCHECK = "fa-circle-thin";
 const LINE_THROUGH = "lineThrough";
 
-const save = () => {localStorage.setItem('storagelist', JSON.stringify(LIST));
-                   localStorage.setItem('storageid', id);
-                   };
+const myStorage = window.localStorage;
 
-const LIST = JSON.parse(localStorage.getItem('storage')) || [];
+let LIST;
+if(myStorage.getItem('storagelist') === null) {
+    LIST = [];
+}else {
+    LIST= JSON.parse(myStorage.getItem('storagelist'));
+}
+
+let id;
+if(myStorage.getItem('storageid') === null) {
+    id = 0;
+}else {
+    id= JSON.parse(myStorage.getItem('storageid'));
+}
+
+const save = () => {myStorage.setItem('storagelist', JSON.stringify(LIST));
+                   myStorage.setItem('storageid', id);
+                   };
+                  
+                  
+//const LIST = JSON.parse(myStorage.getItem('storage')) || [];
 // const LIST = [];
-let id = localStorage.getItem('storageid') || 0;
+//let id = myStorage.getItem('storageid') || 0;
 
 
 const options = { weekday: "long", month: "short", day: "numeric" };
