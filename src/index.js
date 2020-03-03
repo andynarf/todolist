@@ -6,6 +6,7 @@ document.getElementById("skeletonid").innerHTML= skeleton;
 const dateElement = document.getElementById("date");
 const list = document.getElementById("list");
 const input = document.getElementById("input");
+const date = document.getElementById("start");
 const priority = document.getElementById("priority");
 const description = document.getElementById("description");
 const submit = document.getElementById("submit");
@@ -36,7 +37,8 @@ const loadToDo = localStorage => {
       elem.done,
       elem.trash,
       elem.priority,
-      elem.description
+      elem.description,
+      elem.date
     );
   });
 };
@@ -62,6 +64,7 @@ const addToDo = (toDo, id, done, trash, priority, description) => {
     <div class="dropdown">
     <button class="dropbtn">Details</button>
     <div class="dropdown-content">
+      <a href="#"><b>Date:</b> ${date.value}</a>
       <a href="#"><b>Priority:</b> ${priority.value}</a>
       <a href="#"><b>Description:</b> ${description}</a>
     </div>
@@ -74,15 +77,17 @@ const addToDo = (toDo, id, done, trash, priority, description) => {
 submit.addEventListener("click", event => {
   const toDo = input.value;
   const textarea = description.value;
+  const datevalue = date.value;
   if (toDo) {
-    addToDo(toDo, id, false, false, priority, textarea);
+    addToDo(toDo, id, false, false, priority, textarea, datevalue);
     myStorage.push({
       name: toDo,
       id: id,
       done: false,
       trash: false,
       priority: priority.value,
-      description: textarea
+      description: textarea,
+      date: datevalue
     });
     id++;
     updateLocalStorage(myStorage);

@@ -15,7 +15,12 @@ const skeleton = `
       type="text"
       requiered
     />
-    <label for="priority">Select Priority:</label>
+    <label for="start">Date:</label>
+
+    <input type="date" id="start" name="trip-start">
+
+    <label for="priority">Priority:</label>
+
     <select id="priority" name="priority" class="formspace" required>
       <option value="low">Low</option>
       <option value="medium">Medium</option>
