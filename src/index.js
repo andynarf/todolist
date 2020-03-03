@@ -3,7 +3,7 @@ import "./css/style.css";
 const dateElement = document.getElementById("date");
 const list = document.getElementById("list");
 const input = document.getElementById("input");
-const priority= document.getElementById('priority').value
+const priority= document.getElementById('priority')
 const description= document.getElementById('description')
 const submit = document.getElementById('submit')
 
@@ -39,7 +39,7 @@ const addToDo = (toDo, id, done, trash, priority, description) => {
     <div class="dropdown">
     <button class="dropbtn">Details</button>
     <div class="dropdown-content">
-      <a href="#">priority: ${priority}</a>
+      <a href="#">priority: ${priority.value}</a>
       <a href="#">description: ${description}</a>
     </div>
   </div> 
@@ -58,7 +58,7 @@ if (toDo) {
       id: id,
       done: false,
       trash: false,
-      priority: priority,
+      priority: priority.value,
       description: description
     });
     id++;
