@@ -36,6 +36,6 @@ const skeleton = `
   </container>
 </div>
 </div>
-`
+`;
 
 export default skeleton;

@@ -30,21 +30,6 @@ function updateLocalStorage(array) {
   window.localStorage.setItem('ids', id);
 }
 
-const loadToDo = localStorage => {
-  localStorage.forEach(elem => {
-    addToDo(
-      elem.name,
-      elem.id,
-      elem.done,
-      elem.trash,
-      elem.priority,
-      elem.description,
-      elem.date,
-    );
-  });
-};
-
-
 const options = { weekday: 'long', month: 'short', day: 'numeric' };
 const today = new Date();
 dateElement.innerHTML = today.toLocaleDateString('en-US', options);
@@ -74,6 +59,20 @@ const addToDo = (toDo, id, done, trash, priority, description, date) => {
   list.insertAdjacentHTML(position, item);
 };
 
+const loadToDo = localStorage => {
+  localStorage.forEach(elem => {
+    addToDo(
+      elem.name,
+      elem.id,
+      elem.done,
+      elem.trash,
+      elem.priority,
+      elem.description,
+      elem.date,
+    );
+  });
+};
+
 submit.addEventListener('click', () => {
   const toDo = input.value;
   const textarea = description.value;
@@ -90,9 +89,8 @@ submit.addEventListener('click', () => {
       description: textarea,
       date: datevalue,
     });
-    id++;
+    id += 1;
     updateLocalStorage(myStorage);
-    console.log(myStorage);
   }
   input.value = '';
   description.value = '';
@@ -110,17 +108,16 @@ const removeToDo = element => {
   element.parentNode.parentNode.removeChild(element.parentNode);
   myStorage[element.id].trash = true;
   updateLocalStorage(myStorage);
-  console.log(myStorage);
 };
 
 list.addEventListener('click', event => {
   const element = event.target;
   const elementJob = element.attributes.job.value;
 
-  if (elementJob == 'complete') {
+  if (elementJob === 'complete') {
     completeToDo(element);
     updateLocalStorage(myStorage);
-  } else if (elementJob == 'delete') {
+  } else if (elementJob === 'delete') {
     removeToDo(element);
     updateLocalStorage(myStorage);
   }
