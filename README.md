@@ -21,7 +21,7 @@ And finally, after the introduction of a new lesson about OOP. The lesson shows 
 
 ## Live Demo
 
-[Live Demo Link]()
+[Live Demo Link](https://rawcdn.githack.com/andynarf/todolist/722560b7661d260661e4690ac64dc0fda277dbb8/dist/index.html)
 
 ## Getting Started
 
