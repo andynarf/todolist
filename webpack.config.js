@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   entry: './src/index.js',
-  
+
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
@@ -34,10 +34,10 @@ module.exports = {
             loader: 'file-loader',
             options: {
               name: '[name].[ext]',
-              outputPath: 'fonts/'
+              outputPath: 'fonts/',
             },
           },
-        ]
+        ],
       },
       {
         test: /\.(gif|png|jpe?g|svg)$/i,
@@ -56,15 +56,12 @@ module.exports = {
         test: /font-awesome\.config\.js/,
         use: [
           { loader: 'style-loader' },
-          { loader: 'font-awesome-loader' }
-        ]
+          { loader: 'font-awesome-loader' },
+        ],
       },
-      
+
     ],
   },
 
-  
+
 };
-
-
-
