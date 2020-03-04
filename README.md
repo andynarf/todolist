@@ -2,7 +2,7 @@
 
 > To-Do List, rendered in the browser.
 
-![screenshot]()
+![screenshot](https://i.imgur.com/rBmGvFj.png)
 
 The Todo list project comes after the student has learned about:
 
