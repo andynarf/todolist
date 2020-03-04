@@ -9,17 +9,17 @@ const skeleton = `
 <div class="add-to-do">
   <container id="form">
     <input
-      placeholder="ToDo"
+      placeholder="Add a To-Do Task"
       id="input"
       class="formspace"
       type="text"
       requiered
     />
-    <label for="start">Date:</label>
+    <label for="start" class="date">Date:</label>
 
     <input type="date" id="start" name="trip-start">
 
-    <label for="priority">Priority:</label>
+    <label for="priority" id="prioritylabel" >Priority:</label>
 
     <select id="priority" name="priority" class="formspace" required>
       <option value="low">Low</option>
