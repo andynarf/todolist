@@ -11,6 +11,10 @@ const priority = document.getElementById('priority');
 const description = document.getElementById('description');
 const submit = document.getElementById('submit');
 
+const projectsList = document.getElementById('projectsList');
+const listInput = document.getElementById('listInput');
+const submitProject = document.getElementById('submitproject');
+
 const CHECK = 'fa-check-circle';
 const UNCHECK = 'fa-circle-thin';
 const LINE_THROUGH = 'lineThrough';

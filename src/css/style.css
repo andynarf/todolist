@@ -12,6 +12,12 @@ body {
   margin: 0 auto;
 }
 
+.bigContainer {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
 /* ------------ header ------------ */
 .header {
   width: 380px;
@@ -49,6 +55,18 @@ body {
   font-size: 25px;
   font-family: "Titillium Web", sans-serif;
 }
+
+/* ------------ projectList ------------ */
+
+.projectList {
+  width: 50%;
+  background-color: lightblue;
+}
+
+#skeletonid {
+  width: 50%;
+}
+
 
 /* ------------ content ------------ */
 .content {
