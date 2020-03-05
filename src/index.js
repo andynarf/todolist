@@ -20,10 +20,11 @@ if (myStorage == null) {
   myStorage = [];
 }
 
-let id = window.localStorage.getItem('ids');
+let id = JSON.parse(window.localStorage.getItem('ids'));
 if (id == null) {
   id = 0;
 }
+
 
 function updateLocalStorage(array) {
   window.localStorage.setItem('TODOS', JSON.stringify(array));
@@ -33,6 +34,12 @@ function updateLocalStorage(array) {
 const options = { weekday: 'long', month: 'short', day: 'numeric' };
 const today = new Date();
 dateElement.innerHTML = today.toLocaleDateString('en-US', options);
+
+
+const createToDo = (name, id, done, trash, priority, description, date) => ({
+  name, id, done, trash, priority, description, date,
+});
+
 
 const addToDo = (toDo, id, done, trash, priority, description, date) => {
   if (trash) {
@@ -59,6 +66,19 @@ const addToDo = (toDo, id, done, trash, priority, description, date) => {
   list.insertAdjacentHTML(position, item);
 };
 
+const renderToDo = (elem) => {
+  addToDo(
+    elem.name,
+    elem.id,
+    elem.done,
+    elem.trash,
+    elem.priority,
+    elem.description,
+    elem.date,
+  );
+};
+
+
 const loadToDo = localStorage => {
   localStorage.forEach(elem => {
     addToDo(
@@ -79,18 +99,11 @@ submit.addEventListener('click', () => {
   const datevalue = date.value;
   const prior = priority.value;
   if (toDo) {
-    addToDo(toDo, id, false, false, prior, textarea, datevalue);
-    myStorage.push({
-      name: toDo,
-      id,
-      done: false,
-      trash: false,
-      priority: prior,
-      description: textarea,
-      date: datevalue,
-    });
-    id += 1;
+    myStorage.push(createToDo(toDo, id, false, false, prior, textarea, datevalue));
+    renderToDo(myStorage.slice(-1)[0]);
+    id += 1; 
     updateLocalStorage(myStorage);
+    console.log(myStorage);
   }
   input.value = '';
   description.value = '';
