@@ -17,7 +17,8 @@ const LINE_THROUGH = 'lineThrough';
 
 let myStorage = JSON.parse(window.localStorage.getItem('TODOS'));
 if (myStorage == null) {
-  myStorage = [];
+  myStorage = [
+  ];
 }
 
 let id = JSON.parse(window.localStorage.getItem('ids'));
@@ -101,9 +102,8 @@ submit.addEventListener('click', () => {
   if (toDo) {
     myStorage.push(createToDo(toDo, id, false, false, prior, textarea, datevalue));
     renderToDo(myStorage.slice(-1)[0]);
-    id += 1; 
+    id += 1;
     updateLocalStorage(myStorage);
-    console.log(myStorage);
   }
   input.value = '';
   description.value = '';
