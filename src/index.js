@@ -19,22 +19,60 @@ const CHECK = 'fa-check-circle';
 const UNCHECK = 'fa-circle-thin';
 const LINE_THROUGH = 'lineThrough';
 
+let currentList;
+
+
 let myStorage = JSON.parse(window.localStorage.getItem('TODOS'));
 if (myStorage == null) {
-  myStorage = [
-  ];
+  myStorage = [];
+  myStorage.push(createList('default', 0, 0, false, []));
+}
+let listId = JSON.parse(window.localStorage.getItem('ids'));
+if (listId == null) {
+  listId = 1;
 }
 
-let id = JSON.parse(window.localStorage.getItem('ids'));
-if (id == null) {
-  id = 0;
-}
-
+currentList = myStorage[0];
+addProject(currentList);
 
 function updateLocalStorage(array) {
   window.localStorage.setItem('TODOS', JSON.stringify(array));
-  window.localStorage.setItem('ids', id);
+  window.localStorage.setItem('ids', listId);
 }
+
+const createList = (name, listId, id, trash, array) => ({
+  listId, id, trash, name, array,
+});
+
+const addProject = (currentList) => {
+  if (currentList.trash) {
+    return;
+  }
+  const position = 'beforeend';
+  const item = `
+    <li class="item">
+    <p > ${currentList.name}  </p>
+    <i class="fa fa-trash-o de" job="delete" id="${currentList.listId}" ></i>
+    </li>`;
+  projectsList.insertAdjacentHTML(position, item);
+};
+
+const addList = (name, listId) => {
+  if (name) {
+    myStorage.push(createList(name, listId, 0, false, []));
+    currentList = myStorage[listId];
+    addProject(currentList); // get last item on the array
+    console.log(myStorage);
+    listId += 1;
+    updateLocalStorage(myStorage);
+  }
+  input.value = '';
+  description.value = '';
+};
+
+
+submitProject.addEventListener('click', addList(listInput, listId));
+
 
 const options = { weekday: 'long', month: 'short', day: 'numeric' };
 const today = new Date();
@@ -104,9 +142,9 @@ submit.addEventListener('click', () => {
   const datevalue = date.value;
   const prior = priority.value;
   if (toDo) {
-    myStorage.push(createToDo(toDo, id, false, false, prior, textarea, datevalue));
-    renderToDo(myStorage.slice(-1)[0]);
-    id += 1;
+    currentList.array.push(createToDo(toDo, currentList.id, false, false, prior, textarea, datevalue));
+    renderToDo(currentList.array.slice(-1)[0]); // get last item on the array
+    currentList.id += 1;
     updateLocalStorage(myStorage);
   }
   input.value = '';
@@ -118,12 +156,12 @@ const completeToDo = element => {
   element.classList.toggle(UNCHECK);
   element.parentNode.querySelector('.text').classList.toggle(LINE_THROUGH);
 
-  myStorage[element.id].done = !myStorage[element.id].done;
+  currentList.array[element.currentList.id].done = !currentList.array[element.currentList.id].done;
 };
 
 const removeToDo = element => {
   element.parentNode.parentNode.removeChild(element.parentNode);
-  myStorage[element.id].trash = true;
+  currentList.array[element.currentList.id].trash = true;
   updateLocalStorage(myStorage);
 };
 
@@ -141,5 +179,5 @@ list.addEventListener('click', event => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  loadToDo(myStorage);
+  loadToDo(currentList.array);
 });
